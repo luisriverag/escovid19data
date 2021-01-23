@@ -35,7 +35,7 @@ It includes now INE code for provinces and data per 100.000 inhabitants.
 
 ### Variables
 
-Datos originales | Original data:
+#### Datos originales | Original data:
 
 * `date` Día en formato aaaa-mm-dd | Day in yyyy-mm-dd format
 * `province` Provincia | Province
@@ -58,6 +58,7 @@ Datos originales | Original data:
 Datos de RENAVE-ISCIII: la fecha de inicio de síntomas o, en su defecto, la fecha de diagnóstico menos 6 días (con prefijo `num_`) (fuente: https://cnecovid.isciii.es/covid19/resources/datos_provincias.csv, que desde el 2020-12-30 pasa a usarse https://cnecovid.isciii.es/covid19/resources/casos_diagnostico_provincia.csv), variables explicadas en https://cnecovid.isciii.es/covid19/resources/metadata_ccaadecl_prov_edad_sexo.pdf
 
 * `num_casos` el número de casos totales, confirmados o probables
+* `num_casos_cum1` el número de casos anterior acumulado (calculado a partir del anterior) 
 * `num_casos_prueba_pcr` el número de casos con prueba de laboratorio PCR o técnicas moleculares
 * `num_casos_prueba_test_ac` el número de casos con prueba de laboratorio de test rápido de anticuerpos
 * `num_casos_prueba_otras` el número de casos con otras pruebas de laboratorio, mayoritariamente por detección de antígeno o técnica Elisa
@@ -65,8 +66,18 @@ Datos de RENAVE-ISCIII: la fecha de inicio de síntomas o, en su defecto, la fec
 * `num_casos_prueba_elisa` Número de casos con prueba de laboratorio deserología de alta resolución (ELISA/ECLIA/CLIA)
 * `num_casos_prueba_desconocida` el número de casos sin información sobre la prueba de laboratorio
 
+Datos ISCIII, de este archivo https://cnecovid.isciii.es/covid19/resources/casos_hosp_uci_def_sexo_edad_provres.csv que tiene información de: Número de hospitalizaciones, número de ingresos en UCI y número de defunciones por sexo, edad y provincia de residencia. Asiganación de fecha_ Hospitalizaciones,   ingresos   en   UCI,   defunciones:   los   casos   hospitalizados   están representados  por  fecha  de  hospitalización  (en  su  defecto,  la  fecha  de  diagnóstico,  y  en su defecto la fecha clave3, los casos UCI por fecha de admisión en UCI  (en su defecto, la fecha de diagnóstico, y en su defecto la fecha claveⁱ) y las defunciones  por  fecha  de defunción  (en su defecto, la fecha de diagnóstico, y en su defecto la fecha claveⁱ.).
 
-Datos calculados a partir de los datos de arriba | Calculated data:
+* `num_casos2` casos diarios. "Número   decasos   notificados   confirmados   con   una   prueba   diagnóstica   positiva   de infección  activa  (PDIA)  tal  como  se  establece  en  la  Estrategia  de  detección  precoz, vigilancia y control de COVID-19 y además los casos notificados antes del 11 de mayo que requirieron hospitalización, ingreso en UCI o fallecieron con diagnóstico clínico de COVID-19, de acuerdo a las definiciones de caso vigentes en cada momento".
+* `num_casos_cum2` el número de casos anterior acumulado
+* `num_hosp` Número de casoshospitalizados
+* `num_hosp_cum` hospitalizados acumulados
+* `num_uci` Número de casos ingresados en UCI
+* `num_uci_cum` Número de casos ingresados en UCI acumulados (calculado a partir del anterior)
+* `num_def` Número de defunciones.
+* `num_def_cum` Número de defunciones acumuladas (calculado a partir del anterior) 
+
+#### Datos calculados a partir de los datos de arriba | Calculated data:
 
 * `cases_per_cienmil` Casos acumulados por 100.000 habitantes | Cumulative cases per 100,000 inhabitants
 * `intensive_care_per_100000` Casos UCI por 100.000 habitantes | Intensive care per 100,000 inhabitants
@@ -105,13 +116,22 @@ De la hoja de cálculo del Ministerio de Sanidad: https://www.mscbs.gob.es/profe
 * `mnt_daily_deaths` Fallecidos diarios publicados
 * `mnt_deceased` Fallecidos acumulados calculados a partir de los datos diarios 
 
-Del archivo CSV  del Ministerio de Sanidad: https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Datos_Casos_COVID19.csv 
+Del archivo CSV del Ministerio de Sanidad: https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Datos_Casos_COVID19.csv 
 
 * `mnt_csv_daily_cases` Casos diarios | Daily cases
 * `mnt_csv_new_hosp` Nuevos hospitalizados diarios | New daily hospitalizations
 * `mnt_csv_new_ic` Nuevos hospitalizados en UCI  | New daily in intensive care
 * `mnt_csv_daily_deaths` Fallecidos diarios | Daily deaths
 * `mnt_csv_deceased` Fallecidos acumulados calculados a partir de los datos diarios | Cumulative deaths (calculate)
+
+De los PDF y XLSX de vacunación del Ministerio de Sanidad:
+
+* `vac_dosis_entregadas` Dosis.entregadas
+* `vac_dosis_administradas` Dosis.administradas
+* `vac_perc_entregadas` % de administradas sobre entregadas
+* `vac_date_data`  Última fecha de actualización de datos 
+* `vac_date_last`  Fecha de la última vacuna registrada 
+* `vac_date_published` Fecha de publicación del informe
 
 ### Población por provincias (2019)
 
@@ -167,7 +187,7 @@ Contacto: covid19@montera34.com
 
 Hay muchas personas que nos habéis ayudado y aportado pistas. Gracias a todas por colaborar. 
 
-Ahora mismo, estamos manteniendo los datos y amadrinando provincias y comunidades autónomas o han ayudado en alún momento: [@ProsumidorSoc](https://twitter.com/ProsumidorSoc) [@numeroteca](https://twitter.com/numeroteca) [@arivero](https://twitter.com/arivero) [@ManoloYuri](https://twitter.com/ManoloYuri) [@congosto](https://twitter.com/congosto) [@skotperez](https://twitter.com/skotperez) [@allisdata](https://twitter.com/@allisdata) [@acorsin](https://twitter.com/acorsin) [@hhkaos](https://twitter.com/hhkaos) [@belengarcia_8](https://twitter.com/belengarcia_8) [@Tejerauskas](https://twitter.com/Tejerauskas) [@aniol](https://twitter.com/aniol) [@zgzmiki89](https://twitter.com/zgzmiki89) [@mota_santiago](https://twitter.com/mota_santiago) [@nachotronic](https://twitter.com/nachotronic) [@puzzle72](https://twitter.com/@puzzle72) [@montera34](https://twitter.com/@montera34) [@alfonsotwr](https://twitter.com/alfonsotwr) [@lipido](https://twitter.com/lipido) [@danielegrasso](https://twitter.com/danielegrasso) [@picanumeros](https://twitter.com/picanumeros) [@walyt](https://twitter.com/walyt) [@JKniffki](https://twitter.com/JKniffki).
+Ahora mismo, estamos manteniendo los datos y amadrinando provincias y comunidades autónomas o han ayudado en alún momento: [@ProsumidorSoc](https://twitter.com/ProsumidorSoc) [@numeroteca](https://twitter.com/numeroteca) [@arivero](https://twitter.com/arivero) [@ManoloYuri](https://twitter.com/ManoloYuri) [@congosto](https://twitter.com/congosto) [@skotperez](https://twitter.com/skotperez) [@allisdata](https://twitter.com/@allisdata) [@acorsin](https://twitter.com/acorsin) [@hhkaos](https://twitter.com/hhkaos) [@belengarcia_8](https://twitter.com/belengarcia_8) [@Tejerauskas](https://twitter.com/Tejerauskas) [@aniol](https://twitter.com/aniol) [@zgzmiki89](https://twitter.com/zgzmiki89) [@mota_santiago](https://twitter.com/mota_santiago) [@nachotronic](https://twitter.com/nachotronic) [@puzzle72](https://twitter.com/@puzzle72) [@montera34](https://twitter.com/@montera34) [@alfonsotwr](https://twitter.com/alfonsotwr) [@lipido](https://twitter.com/lipido) [@danielegrasso](https://twitter.com/danielegrasso) [@picanumeros](https://twitter.com/picanumeros) [@walyt](https://twitter.com/walyt) [@JKniffki](https://twitter.com/JKniffki) [@harlesden88](https://twitter.com/harlesden88).
 
 Coordina el proyecto [@numeroteca](https://twitter.com/numeroteca)
 
