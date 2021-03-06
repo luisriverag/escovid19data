@@ -2,6 +2,7 @@
 
 [![GitHub license](https://img.shields.io/badge/License-Creative%20Commons%20Attribution%204.0%20International-blue)](https://github.com/montera34/escovid19data/blob/master/LICENSE.md)
 [![GitHub commit](https://img.shields.io/github/last-commit/pcm-dpc/COVID-19)](https://github.com/montera34/escovid19data/commits/master)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4536588.svg)](https://doi.org/10.5281/zenodo.4536588)
 
 ## ¿Puedes utilizar los datos? ¿Cómo colaborar?
 
@@ -57,8 +58,9 @@ It includes now INE code for provinces and data per 100.000 inhabitants.
 
 Datos de RENAVE-ISCIII: la fecha de inicio de síntomas o, en su defecto, la fecha de diagnóstico menos 6 días (con prefijo `num_`) (fuente: https://cnecovid.isciii.es/covid19/resources/datos_provincias.csv, que desde el 2020-12-30 pasa a usarse https://cnecovid.isciii.es/covid19/resources/casos_diagnostico_provincia.csv), variables explicadas en https://cnecovid.isciii.es/covid19/resources/metadata_ccaadecl_prov_edad_sexo.pdf
 
-* `num_casos` el número de casos totales, confirmados o probables
-* `num_casos_cum1` el número de casos anterior acumulado (calculado a partir del anterior) 
+* `num_casos` el número de casos totales, confirmados o probables del día
+* `num_casos_cum1` el número de casos `num_casos` acumulado (calculado a partir del anterior) 
+* `num_casos_avg7` el número de casos diarios medio calculado con ventana de 7 días de la variable `num_casos`
 * `num_casos_prueba_pcr` el número de casos con prueba de laboratorio PCR o técnicas moleculares
 * `num_casos_prueba_test_ac` el número de casos con prueba de laboratorio de test rápido de anticuerpos
 * `num_casos_prueba_otras` el número de casos con otras pruebas de laboratorio, mayoritariamente por detección de antígeno o técnica Elisa
@@ -69,7 +71,8 @@ Datos de RENAVE-ISCIII: la fecha de inicio de síntomas o, en su defecto, la fec
 Datos ISCIII, de este archivo https://cnecovid.isciii.es/covid19/resources/casos_hosp_uci_def_sexo_edad_provres.csv que tiene información de: Número de hospitalizaciones, número de ingresos en UCI y número de defunciones por sexo, edad y provincia de residencia. Asiganación de fecha_ Hospitalizaciones,   ingresos   en   UCI,   defunciones:   los   casos   hospitalizados   están representados  por  fecha  de  hospitalización  (en  su  defecto,  la  fecha  de  diagnóstico,  y  en su defecto la fecha clave3, los casos UCI por fecha de admisión en UCI  (en su defecto, la fecha de diagnóstico, y en su defecto la fecha claveⁱ) y las defunciones  por  fecha  de defunción  (en su defecto, la fecha de diagnóstico, y en su defecto la fecha claveⁱ.).
 
 * `num_casos2` casos diarios. "Número   decasos   notificados   confirmados   con   una   prueba   diagnóstica   positiva   de infección  activa  (PDIA)  tal  como  se  establece  en  la  Estrategia  de  detección  precoz, vigilancia y control de COVID-19 y además los casos notificados antes del 11 de mayo que requirieron hospitalización, ingreso en UCI o fallecieron con diagnóstico clínico de COVID-19, de acuerdo a las definiciones de caso vigentes en cada momento".
-* `num_casos_cum2` el número de casos anterior acumulado
+* `num_casos_cum2` el número de casos `num_casos2` acumulado
+* `num_casos_avg7` el número de casos diarios medio calculado con ventana de 7 días de la variable `num_casos2`
 * `num_hosp` Número de casoshospitalizados
 * `num_hosp_cum` hospitalizados acumulados
 * `num_uci` Número de casos ingresados en UCI
@@ -136,6 +139,31 @@ De los PDF y XLSX de vacunación del Ministerio de Sanidad:
 ### Población por provincias (2019)
 
 Población por provincias del INE:  https://www.ine.es/jaxiT3/Datos.htm?t=2852#!tabs-tabla
+
+## Datos de vacunaciones
+Hemos empezado a recopilar los datos de vacunaciones publicados de Lunes a Viernes por Sanidad en esta [dirección](https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/vacunaCovid19.htm).
+
+Esos datos son leídos y replicados [aquí](https://github.com/montera34/escovid19data/tree/master/data/original/vacunas). Dejamos dos tipos de ficheros :
+1. Fichero diario con el formato: 
+`estado_vacunacion_añomesdía.csv`.
+Con formato año cuatro dígitos, mes y día de dos dígitos.
+2. Fichero de datos acumulados con el nómbre de fichero : `estado_vacunacion_.csv`
+
+Los campos del `csv` son los siguientes: 
+
+ * `date_pub`: fecha de publicación del informe
+ * `ccaa` : Comunidad/Ciudad autónoma	
+ * `Dosis entregadas Pfizer` : dosis entregadas a la Comunidad/Ciudad 	
+ * `Dosis entregadas Moderna` : idem	
+ * `Dosis entregadas AstraZeneca` : idem	
+ * `Dosis entregadas`: suma de las entregadas de los tres fabricantes	
+ * `Dosis administradas	% sobre entregadas`:cociente de vacunas administradas sobre vacunas entregadas	
+ * `Total pauta completada`: total de pautas completadas o dobles vacunaciones	
+ * `Última fecha de actualización de datos`: fecha indicada en la tabla como última con actualización	
+ * `Fecha de la ultima vacuna registrada`: este campo no está en uso actualmente	
+ * `source_name`: nombre la fuente `Sanidad` en todos los casos	
+ * `source` : link al fichero original de los datos
+
 
 ## Estructura de archivos
 
